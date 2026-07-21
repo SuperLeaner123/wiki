@@ -92,6 +92,9 @@ def entry(request, title):
     content = util.get_entry(title)
     if content is None:
         return render(request, "encyclopedia/error.html", {
-            "message": f"The page '{title}' was not found."
+            "message": f"The requested page '{title}' was not found."
         })
-  
+    return render(request, "encyclopedia/entry.html", {
+        "title": title,
+        "content": markdown2.markdown(content)
+    })
