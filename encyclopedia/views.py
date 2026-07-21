@@ -86,3 +86,12 @@ def random_page(request):
         selected_page = random.choice(entries)
         return redirect("entry", title=selected_page)
     return redirect("index")
+
+
+def entry(request, title):
+    content = util.get_entry(title)
+    if content is None:
+        return render(request, "encyclopedia/error.html", {
+            "message": f"The page '{title}' was not found."
+        })
+  
